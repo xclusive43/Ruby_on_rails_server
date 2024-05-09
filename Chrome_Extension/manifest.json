@@ -1,0 +1,48 @@
+{
+  "manifest_version": 3,
+  "name": "SiteSentry",
+  "version": "4.1",
+  "description": "SiteSentry is your vigilant companion for safe and efficient browsing. Empower yourself with real-time monitoring of your online activity and protect your productivity. With SiteSentry, effortlessly track the time spent on each website and guard against distractions. Gain insights into your browsing habits and take control of your online experience. Stay focused, stay secure, with SiteSentry",
+  "permissions": ["tabs",
+  "activeTab",
+  "storage", "scripting" ],
+  "action": {
+    "default_popup": "home/popup.html",
+    "default_icon": {
+      "16": "images/icon16.png",
+      "48": "images/icon48.png",
+      "128": "images/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "background": {
+    "service_worker": "background2.js",
+    "persistent": false
+  },
+  "browser_action": {
+    "default_popup": "home/popup.html",
+    "default_icon": {
+      "16": "images/icon16.png",
+      "48": "images/icon48.png",
+      "128": "images/icon128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content1.js"] 
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["images/*", "scripts/*", "styles/*"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+ 
+ 
+}

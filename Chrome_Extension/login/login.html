@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      width: 300px;
+    }
+    label {
+      display: block;
+      margin-bottom: 10px;
+    }
+    input[type="text"],
+    input[type="password"] {
+      width: 95%;
+      padding: 8px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .create-account-link {
+      margin-top: 10px;
+    }
+    .create-account-link a {
+      color: #007bff;
+      text-decoration: none;
+    }
+    .create-account-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+    <a href="../home/popup.html" id="back" class="back-icon">&lt;</a>
+  <h1>Login</h1>
+  <form id="loginForm">
+    <label for="username">Username or Email:</label>
+    <input type="text" id="username" name="username">
+    
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password">
+    
+    <button type="button" id="loginButton">Login</button>
+  </form>
+  
+  <div class="create-account-link">
+    <a href="../signup/signup.html" id="createAccountLink">Don't have an account? create new</a>
+  </div>
+
+  <script src="login.js"></script>
+</body>
+</html>
