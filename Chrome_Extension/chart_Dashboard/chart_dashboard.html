@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chart Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            /* width: 550px;/ */
+            width: 550px;
+            color: white;
+        }
+
+        .header {
+            background-color: #007bff;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            flex-direction: row;
+            text-align: center;
+            padding: 5px 0;
+            margin-bottom: 10px;
+        }
+
+        #myChart {
+            background-color: black;
+            margin: 2px;
+            /* width: 99%; */
+            margin-right: 5px;
+        }
+
+        .back-icon{
+            color: white;
+        }
+
+    </style>
+</head>
+
+<body>
+    <!-- <a href="../home/popup.html" id="back" class="back-icon">&lt;</a> -->
+    <div class="header">
+        <a href="#" id="back" class="back-icon">&lt; Back</a>
+        <h4>Time Spent on Websites</h4>
+    </div>
+    <div>
+        <canvas id="myChart"></canvas>
+    </div>
+    <script src="Chart.min.js"></script>
+    <script src="chart_dashboard.js"></script>
+</body>
+
+</html>

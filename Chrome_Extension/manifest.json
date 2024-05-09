@@ -42,7 +42,15 @@
       "resources": ["images/*", "scripts/*", "styles/*"],
       "matches": ["<all_urls>"]
     }
-  ]
- 
+  ],
+  "sandbox": {
+    "pages": [
+      "../Chrome_Extension/chart_Dashboard/chart_dashboard.html"
+    ]
+  },
+  "content_security_policy": {
+    "sandbox": "sandbox allow-scripts; script-src 'unsafe-inline' https://cdn.jsdelivr.net"
+  }
+  
  
 }

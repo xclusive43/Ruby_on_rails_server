@@ -16,7 +16,7 @@ chrome.windows.onFocusChanged.addListener(windowId => {
   } else {
     chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
       activeTabId = tabs[0].id;
-      if (!tabTimes[activeTabId]) {
+      if (!tabTimes[activeTabId]) { 
         tabTimes[activeTabId] = 0;
       }
     });
@@ -24,15 +24,17 @@ chrome.windows.onFocusChanged.addListener(windowId => {
 });
 
 setInterval(() => {
-    if (activeTabId) {
-      tabTimes[activeTabId]++;
-    }
-    console.log(tabTimes,activeTabId)
-  }, 1000);
-  
-  chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    if (request.cmd === 'getTabTimes') {
-        console.log(tabTimes)
-      sendResponse(tabTimes);
-    }
-  });
+  if (activeTabId) {
+    tabTimes[activeTabId]++;
+  }
+}, 1000);
+
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  if (request.cmd === 'getTabTimes') {
+    sendResponse(tabTimes);
+  }
+  if (request.cmd === 'getActiveTabID') {
+    sendResponse(activeTabId); // Send the activeTabId variable
+  }
+});
+
