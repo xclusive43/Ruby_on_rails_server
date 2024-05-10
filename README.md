@@ -1,2 +1,0 @@
-# Ruby_on_rails_server
-Ruby_on_rails_server
