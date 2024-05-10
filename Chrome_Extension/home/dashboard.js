@@ -31,7 +31,7 @@ function fetchData() {
             urlTimes[url] = 0;
             renderTimes[url] = 0;
           }
-          urlTimes[url] += response[tabId]+ ' ' + tabId;
+          urlTimes[url] += response[tabId] + ' ' + tabId;
           renderTimes[url] += response[tabId] + ' ' + tabId;
           // Assign tab ID to renderTimes object
           // renderTimes['_tabId'] = tabId;
@@ -70,19 +70,80 @@ function renderTabData(tabData) {
     if (value[1] == activeTabId) {
       listItem.style.backgroundColor = '#00ffa6'; // green background
       listItem.style.color = '#666666';
+
     } else {
       listItem.style.backgroundColor = '#ededed'; // Light red background
       listItem.style.color = '#666666';
     }
 
     listItem.textContent = url + ': ' + formatDuration(duration);
+
+    // Create the "Block" button
+    var blockButton = document.createElement("button");
+    var unBlockButton = document.createElement("button");
+
+    blockButton.textContent = "Block";
+    unBlockButton.textContent = "Un-Block";
+
+    blockButton.classList.add("blockButton");
+    unBlockButton.classList.add("blockButton");
+
+    // Apply CSS styles directly
+    blockButton.style.fontSize = "10px"; // Set font size to 10px
+    blockButton.style.border = "none";
+    blockButton.style.marginLeft = "20px";
+    blockButton.style.backgroundColor = "#d40d0d"; //#0dd42b
+    blockButton.style.color = "white";
+    blockButton.style.padding = "5px 10px";
+    blockButton.style.borderRadius = "5px";
+    blockButton.style.cursor = "pointer";
+
+    unBlockButton.style.fontSize = "10px"; // Set font size to 10px
+    unBlockButton.style.border = "none";
+    unBlockButton.style.marginLeft = "20px";
+    unBlockButton.style.backgroundColor = "#0dd42b";
+    unBlockButton.style.color = "white";
+    unBlockButton.style.padding = "5px 10px";
+    unBlockButton.style.borderRadius = "5px";
+    unBlockButton.style.cursor = "pointer";
+
+    // Add click event listener to the "Block" button
+    blockButton.addEventListener("click", function (event) {
+      // Execute your function when the "Block" button is clicked
+      console.log("Block button clicked for URL: " + url);
+
+      // Get the URL associated with this button (replace 'url' with the actual URL)
+    var urlToBlock = url ; //'https://example.com/url_to_block';
+    
+    // Send a message to the background script with the URL to block
+    chrome.runtime.sendMessage({ action: 'blockUrl', url: urlToBlock });
+    });
+
+    // Add click event listener to the "Block" button
+    unBlockButton.addEventListener("click", function (event) {
+      // Execute your function when the "Block" button is clicked
+      console.log("UnBlock button clicked for URL: " + url);
+
+      // Get the URL associated with this button (replace 'url' with the actual URL)
+    var urlToBlock = url ; //'https://example.com/url_to_block';
+    
+    // Send a message to the background script with the URL to block
+    chrome.runtime.sendMessage({ action: 'unblockUrl', url: urlToBlock });
+    });
+
+    // Append the "Block" button to the list item
+    listItem.appendChild(blockButton);
+    listItem.appendChild(unBlockButton);
     timeList.appendChild(listItem);
 
-//     var list = document.getElementById("myList");
-// list.appendChild(listItem);
-    // });
   });
 
+}
+
+// Function to execute when the "Block" button is clicked
+function blockButtonClicked() {
+  // Add your code here to handle the block action
+  console.log("Block button clicked!");
 }
 
 // Function to format the duration
@@ -283,6 +344,21 @@ document.getElementById('accountBtn').addEventListener('click', function () {
 document.getElementById('closeBtn').addEventListener('click', function () {
   // Hide the dialog
   hideDialog();
+});
+
+// Event listener for close button click
+document.getElementById('settingsIcon').addEventListener('click', function () {
+  // Retrieve data from sync storage
+  chrome.storage.sync.get(['user'], function (result) {
+    const data = result.user;
+    // Retrieve user data from session storage
+    // Check if user data exists
+    if (data) {
+      window.location.href = '../settings/settings.html';
+    } else {
+      alert('An error occurred.Please login or Please try again later.');
+    }
+  });
 });
 
 

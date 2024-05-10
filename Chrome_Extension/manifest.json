@@ -3,9 +3,7 @@
   "name": "SiteSentry",
   "version": "4.1",
   "description": "SiteSentry is your vigilant companion for safe and efficient browsing. Empower yourself with real-time monitoring of your online activity and protect your productivity. With SiteSentry, effortlessly track the time spent on each website and guard against distractions. Gain insights into your browsing habits and take control of your online experience. Stay focused, stay secure, with SiteSentry",
-  "permissions": ["tabs",
-  "activeTab",
-  "storage", "scripting" ],
+  "permissions": ["tabs","activeTab", "storage", "scripting" , "webRequest", "declarativeNetRequest"],
   "action": {
     "default_popup": "home/popup.html",
     "default_icon": {
@@ -50,6 +48,15 @@
   },
   "content_security_policy": {
     "sandbox": "sandbox allow-scripts; script-src 'unsafe-inline' https://cdn.jsdelivr.net"
+  }
+  ,"declarative_net_request": {
+    "rule_resources": [
+      {
+        "id": "ruleset_1",
+        "enabled": true,
+        "path": "rules.json"
+      }
+    ]
   }
   
  

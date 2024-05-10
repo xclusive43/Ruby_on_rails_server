@@ -1,0 +1,10 @@
+html, body {
+    background-color: #212324 !important;
+    
+}
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}

@@ -1,67 +1,78 @@
-// Step 1: Parse the data
-const data = [
-    {
-        "id": 102726831,
-        "url": "https://chatgpt.com/",
-        "time": "1 hours 3 minutes 30 seconds",
-        "created_at": "2024-05-09T18:32:35.165Z",
-        "updated_at": "2024-05-09T18:38:52.198Z"
-    },
-    {
-        "id": 102726831,
-        "url": "https://googlr.com/",
-        "time": "0 year 0 hours 0 minutes 7 seconds",
-        "created_at": "2024-05-09T18:32:35.165Z",
-        "updated_at": "2024-05-09T18:38:52.198Z"
-    },
-    {
-        "id": 102726831,
-        "url": "https://babaerr.com/",
-        "time": "9 seconds",
-        "created_at": "2024-05-09T18:32:35.165Z",
-        "updated_at": "2024-05-09T18:38:52.198Z"
-    },
-    {
-        "id": 10272612831,
-        "url": "https://chatgpt1.com/",
-        "time": "2 hours 3 minutes 30 seconds",
-        "created_at": "2024-05-09T18:32:35.165Z",
-        "updated_at": "2024-05-09T18:38:52.198Z"
-    },
-    {
-        "id": 10273226831,
-        "url": "https://googlr2.com/",
-        "time": "0 year 0 hours 0 minutes 70 seconds",
-        "created_at": "2024-05-09T18:32:35.165Z",
-        "updated_at": "2024-05-09T18:38:52.198Z"
-    },
-    {
-        "id": 10273226831,
-        "url": "https://babaerr3.com/",
-        "time": "90 seconds",
-        "created_at": "2024-05-09T18:32:35.165Z",
-        "updated_at": "2024-05-09T18:38:52.198Z"
-    },
-    // Other data entries...
-];
+fetchData();
+let data = [];
+function fetchData(){
+    // Retrieve data from sync storage
+  chrome.storage.sync.get(['user'], function (result) {
+    const userData = result.user;
+    // Retrieve user data from session storage
+    // Check if user data exists
+    if (userData) {
+      // window.location.href = 'dashboard.html';
+      // Do something with the user data
 
+        // console.log(tabData)
+        // Send tab data to the server
+        fetch("http://127.0.0.1:3000/get_all_web_data", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": userData.token
+          },
+        })  .then(response => {
+            if (response.ok) {
+              // If login is successful, save user session
+              return response.json();
+            } else {
+              // If login fails, display an alert with the error message
+              return response.json().then(data => {
+                alert(data.error);
+              });
+            }
+          })
+          .then(data => {
+            // Do something with the user data
+            this.data = data.data;
+            createChart();
+           
+          })
+          .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred. Please try again later.');
+          });
+  
+    } 
+});
+}
+
+// Step 1: Parse the data
+
+function createChart(){
 // Step 2: Calculate data for the chart
 const tabTimes = {};
-data.forEach(entry => {
-    console.log(entry.time, parseTime(entry.time))
+this.data.forEach(entry => {
+    if(entry?.time && entry?.time !== undefined | null && entry?.time !== ''){
     const url = entry.url;
-    const timeSpent = parseTime(entry.time); // Helper function to parse time
+    const timeSpent = parseTime(entry?.time) ; // Helper function to parse time
     if (!tabTimes[url] || tabTimes[url] < timeSpent) {
         tabTimes[url] = timeSpent;
     }
+}
 });
 
 // Step 3: Choose a chart library (Chart.js)
 // Assume you've already included Chart.js in your page
 // Step 4: Implement the chart
-const labels = Object.keys(tabTimes);
+let labels = Object.keys(tabTimes);
 const times = Object.values(tabTimes);
-
+// Modify the labels
+const maxLength = 20;
+ labels = Object.keys(tabTimes).map(label => {
+    if (label.length > maxLength) {
+        return label.substring(0, maxLength - 3) + '...'; // Truncate and add ellipsis
+    } else {
+        return label;
+    }
+});
 // Convert time strings to minutes
 // const timesInMinutes = times.map(timeString => calculateMinutes(timeString));
 
@@ -149,7 +160,7 @@ const config = {
 const ctx = document.getElementById('myChart').getContext('2d');
 new Chart(ctx, config);
 
- 
+}
 
 // Helper function to parse time in seconds
 function parseTime(timeString) {
@@ -180,7 +191,6 @@ function parseTime(timeString) {
 
 
 document.addEventListener('DOMContentLoaded', function () {
-
     var back = document.getElementById('back');
     back.addEventListener('click', function (event) {
         event.preventDefault(); // Prevent link navigation
@@ -188,3 +198,4 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     
 });
+
