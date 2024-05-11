@@ -34,7 +34,7 @@ Example JSON object sent by the extension:
   "url": "https://example.com",
   "time": "2024-05-21T12:30:45.000Z"
 }
-
+```
 
 # Website Time Tracker
 
