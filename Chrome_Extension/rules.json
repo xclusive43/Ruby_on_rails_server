@@ -1,20 +1,2 @@
 [
-    {
-        "id": 1,
-        "priority": 1,
-        "action": {"type": "block"},
-        "condition": {"urlFilter":"*://*doubleclick.net/*"}
-    },
-    {
-        "id": 7,
-        "priority": 1,
-        "action": {"type": "block"},
-        "condition": {"urlFilter":"*://*hatgpt.com/*"}
-    },
-    {
-        "id": 3,
-        "priority": 1,
-        "action": { "type": "block" },
-        "condition": { "urlFilter": "*://pagead2.googlesyndication.com/*", "resourceTypes": ["sub_frame"] }
-    }
 ]

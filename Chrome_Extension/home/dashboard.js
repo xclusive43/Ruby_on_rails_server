@@ -11,7 +11,6 @@ function fetchData() {
     chrome.runtime.sendMessage({ cmd: 'getActiveTabID' }, response => {
       if (response != null) {
         activeTabId = response;
-
       }
     });
 
@@ -339,19 +338,19 @@ document.getElementById('closeBtn').addEventListener('click', function () {
 });
 
 // Event listener for close button click
-document.getElementById('settingsIcon').addEventListener('click', function () {
-  // Retrieve data from sync storage
-  chrome.storage.sync.get(['user'], function (result) {
-    const data = result.user;
-    // Retrieve user data from session storage
-    // Check if user data exists
-    if (data) {
-      window.location.href = '../settings/settings.html';
-    } else {
-      alert('An error occurred.Please login or Please try again later.');
-    }
-  });
-});
+// document.getElementById('settingsIcon').addEventListener('click', function () {
+//   // Retrieve data from sync storage
+//   chrome.storage.sync.get(['user'], function (result) {
+//     const data = result.user;
+//     // Retrieve user data from session storage
+//     // Check if user data exists
+//     if (data) {
+//       window.location.href = '../settings/settings.html';
+//     } else {
+//       alert('An error occurred.Please login or Please try again later.');
+//     }
+//   });
+// });
 
 
 

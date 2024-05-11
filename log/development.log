@@ -42704,3 +42704,877 @@ Processing by WebdataController#save_data as */*
 Completed 200 OK in 59ms (Views: 0.6ms | ActiveRecord: 9.2ms | Allocations: 3416)
 
 
+Started POST "/login" for 127.0.0.1 at 2024-05-11 23:28:16 +0530
+Processing by AuthenticationController#login as */*
+  Parameters: {"email"=>"demo@gmail.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"demo@gmail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'demo@gmail.com' LIMIT 1[0m
+  ↳ app/controllers/authentication_controller.rb:4:in `login'
+Completed 200 OK in 240ms (Views: 0.1ms | ActiveRecord: 0.5ms | Allocations: 568)
+
+
+Started POST "/save_web_data" for 127.0.0.1 at 2024-05-11 23:28:17 +0530
+Processing by WebdataController#save_data as */*
+  Parameters: {"id"=>102730214, "url"=>"https://www.facebook.com/", "time"=>"29 seconds", "webdatum"=>{"id"=>102730214, "url"=>"https://www.facebook.com/", "time"=>"29 seconds"}}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 9 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:61:in `current_user'
+  [1m[36mWebData Load (0.4ms)[0m  [1m[34mSELECT `web_data`.* FROM `web_data` WHERE `web_data`.`id` = 102730214 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:10:in `save_data'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM `web_data` WHERE `web_data`.`id` = 102730214 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Create (0.4ms)[0m  [1m[32mINSERT INTO `web_data` (`id`, `url`, `time`, `created_at`, `updated_at`) VALUES (102730214, 'https://www.facebook.com/', '\"29 seconds\"', '2024-05-11 17:58:17.076285', '2024-05-11 17:58:17.076285')[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mTRANSACTION (2.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+Completed 200 OK in 17ms (Views: 0.2ms | ActiveRecord: 4.4ms | Allocations: 3282)
+
+
+Started POST "/save_web_data" for 127.0.0.1 at 2024-05-11 23:28:20 +0530
+Processing by WebdataController#save_data as */*
+  Parameters: {"id"=>102730214, "url"=>"https://www.facebook.com/", "time"=>"33 seconds", "webdatum"=>{"id"=>102730214, "url"=>"https://www.facebook.com/", "time"=>"33 seconds"}}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 9 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:61:in `current_user'
+  [1m[36mWebData Load (0.9ms)[0m  [1m[34mSELECT `web_data`.* FROM `web_data` WHERE `web_data`.`id` = 102730214 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:10:in `save_data'
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Exists? (2.1ms)[0m  [1m[34mSELECT 1 AS one FROM `web_data` WHERE `web_data`.`id` = 102730214 AND `web_data`.`id` != 102730214 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Update (1.5ms)[0m  [1m[33mUPDATE `web_data` SET `web_data`.`time` = '\"33 seconds\"', `web_data`.`updated_at` = '2024-05-11 17:58:20.823671' WHERE `web_data`.`id` = 102730214[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mTRANSACTION (2.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+Completed 200 OK in 25ms (Views: 0.2ms | ActiveRecord: 8.1ms | Allocations: 3416)
+
+
+Started GET "/get_all_web_data" for 127.0.0.1 at 2024-05-11 23:28:23 +0530
+Processing by WebdataController#get_all_data as */*
+  Parameters: {"webdatum"=>{}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 9 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:61:in `current_user'
+  [1m[36mWebData Count (14.9ms)[0m  [1m[34mSELECT COUNT(*) FROM `web_data`[0m
+  ↳ app/controllers/webdata_controller.rb:28:in `get_all_data'
+  [1m[36mWebData Load (0.5ms)[0m  [1m[34mSELECT `web_data`.* FROM `web_data`[0m
+  ↳ app/controllers/webdata_controller.rb:30:in `get_all_data'
+Completed 200 OK in 29ms (Views: 9.0ms | ActiveRecord: 15.7ms | Allocations: 5064)
+
+
+Started POST "/save_web_data" for 127.0.0.1 at 2024-05-11 23:28:27 +0530
+Processing by WebdataController#save_data as */*
+  Parameters: {"id"=>102730214, "url"=>"https://www.facebook.com/", "time"=>"39 seconds", "webdatum"=>{"id"=>102730214, "url"=>"https://www.facebook.com/", "time"=>"39 seconds"}}
+  [1m[36mUser Load (1.9ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 9 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:61:in `current_user'
+  [1m[36mWebData Load (0.5ms)[0m  [1m[34mSELECT `web_data`.* FROM `web_data` WHERE `web_data`.`id` = 102730214 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:10:in `save_data'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Exists? (9.4ms)[0m  [1m[34mSELECT 1 AS one FROM `web_data` WHERE `web_data`.`id` = 102730214 AND `web_data`.`id` != 102730214 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Update (4.4ms)[0m  [1m[33mUPDATE `web_data` SET `web_data`.`time` = '\"39 seconds\"', `web_data`.`updated_at` = '2024-05-11 17:58:27.209472' WHERE `web_data`.`id` = 102730214[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mTRANSACTION (6.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+Completed 200 OK in 47ms (Views: 0.3ms | ActiveRecord: 22.3ms | Allocations: 3416)
+
+
+Started POST "/save_web_data" for 127.0.0.1 at 2024-05-11 23:28:53 +0530
+Processing by WebdataController#save_data as */*
+  Parameters: {"id"=>102730209, "url"=>"chrome://extensions/?errors=cnnekgcenaoobbfjghacdkeflghmcaon", "time"=>"", "webdatum"=>{"id"=>102730209, "url"=>"chrome://extensions/?errors=cnnekgcenaoobbfjghacdkeflghmcaon", "time"=>""}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 9 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:61:in `current_user'
+  [1m[36mWebData Load (0.5ms)[0m  [1m[34mSELECT `web_data`.* FROM `web_data` WHERE `web_data`.`id` = 102730209 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:10:in `save_data'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM `web_data` WHERE `web_data`.`id` = 102730209 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Create (2.8ms)[0m  [1m[32mINSERT INTO `web_data` (`id`, `url`, `time`, `created_at`, `updated_at`) VALUES (102730209, 'chrome://extensions/?errors=cnnekgcenaoobbfjghacdkeflghmcaon', '\"\"', '2024-05-11 17:58:53.181455', '2024-05-11 17:58:53.181455')[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mTRANSACTION (1.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+Completed 200 OK in 22ms (Views: 0.2ms | ActiveRecord: 7.1ms | Allocations: 3282)
+
+
+Started POST "/save_web_data" for 127.0.0.1 at 2024-05-11 23:28:58 +0530
+Processing by WebdataController#save_data as */*
+  Parameters: {"id"=>102730209, "url"=>"chrome://extensions/?errors=cnnekgcenaoobbfjghacdkeflghmcaon", "time"=>"", "webdatum"=>{"id"=>102730209, "url"=>"chrome://extensions/?errors=cnnekgcenaoobbfjghacdkeflghmcaon", "time"=>""}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 9 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:61:in `current_user'
+  [1m[36mWebData Load (2.6ms)[0m  [1m[34mSELECT `web_data`.* FROM `web_data` WHERE `web_data`.`id` = 102730209 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:10:in `save_data'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM `web_data` WHERE `web_data`.`id` = 102730209 AND `web_data`.`id` != 102730209 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+Completed 200 OK in 12ms (Views: 0.1ms | ActiveRecord: 3.7ms | Allocations: 2879)
+
+
+Started POST "/save_web_data" for 127.0.0.1 at 2024-05-11 23:29:03 +0530
+Processing by WebdataController#save_data as */*
+  Parameters: {"id"=>102730209, "url"=>"chrome://extensions/?errors=cnnekgcenaoobbfjghacdkeflghmcaon", "time"=>"", "webdatum"=>{"id"=>102730209, "url"=>"chrome://extensions/?errors=cnnekgcenaoobbfjghacdkeflghmcaon", "time"=>""}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 9 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:61:in `current_user'
+  [1m[36mWebData Load (2.3ms)[0m  [1m[34mSELECT `web_data`.* FROM `web_data` WHERE `web_data`.`id` = 102730209 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:10:in `save_data'
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM `web_data` WHERE `web_data`.`id` = 102730209 AND `web_data`.`id` != 102730209 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+Completed 200 OK in 13ms (Views: 0.2ms | ActiveRecord: 4.6ms | Allocations: 2879)
+
+
+Started POST "/save_web_data" for 127.0.0.1 at 2024-05-11 23:29:08 +0530
+Processing by WebdataController#save_data as */*
+  Parameters: {"id"=>102730209, "url"=>"chrome://extensions/?errors=cnnekgcenaoobbfjghacdkeflghmcaon", "time"=>"", "webdatum"=>{"id"=>102730209, "url"=>"chrome://extensions/?errors=cnnekgcenaoobbfjghacdkeflghmcaon", "time"=>""}}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 9 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:61:in `current_user'
+  [1m[36mWebData Load (5.2ms)[0m  [1m[34mSELECT `web_data`.* FROM `web_data` WHERE `web_data`.`id` = 102730209 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:10:in `save_data'
+  [1m[36mTRANSACTION (2.6ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM `web_data` WHERE `web_data`.`id` = 102730209 AND `web_data`.`id` != 102730209 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mTRANSACTION (3.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+Completed 200 OK in 33ms (Views: 0.4ms | ActiveRecord: 12.5ms | Allocations: 2880)
+
+
+Started POST "/save_web_data" for 127.0.0.1 at 2024-05-11 23:29:11 +0530
+Processing by WebdataController#save_data as */*
+  Parameters: {"id"=>102730214, "url"=>"https://www.facebook.com/", "time"=>"3 seconds", "webdatum"=>{"id"=>102730214, "url"=>"https://www.facebook.com/", "time"=>"3 seconds"}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 9 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:61:in `current_user'
+  [1m[36mWebData Load (0.3ms)[0m  [1m[34mSELECT `web_data`.* FROM `web_data` WHERE `web_data`.`id` = 102730214 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:10:in `save_data'
+  [1m[36mTRANSACTION (9.6ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM `web_data` WHERE `web_data`.`id` = 102730214 AND `web_data`.`id` != 102730214 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Update (0.6ms)[0m  [1m[33mUPDATE `web_data` SET `web_data`.`time` = '\"3 seconds\"', `web_data`.`updated_at` = '2024-05-11 17:59:11.928675' WHERE `web_data`.`id` = 102730214[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mTRANSACTION (1.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+Completed 200 OK in 27ms (Views: 0.2ms | ActiveRecord: 12.9ms | Allocations: 3416)
+
+
+Started POST "/save_web_data" for 127.0.0.1 at 2024-05-11 23:29:16 +0530
+Processing by WebdataController#save_data as */*
+  Parameters: {"id"=>102730214, "url"=>"https://www.facebook.com/", "time"=>"8 seconds", "webdatum"=>{"id"=>102730214, "url"=>"https://www.facebook.com/", "time"=>"8 seconds"}}
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 9 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:61:in `current_user'
+  [1m[36mWebData Load (0.4ms)[0m  [1m[34mSELECT `web_data`.* FROM `web_data` WHERE `web_data`.`id` = 102730214 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:10:in `save_data'
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM `web_data` WHERE `web_data`.`id` = 102730214 AND `web_data`.`id` != 102730214 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Update (0.5ms)[0m  [1m[33mUPDATE `web_data` SET `web_data`.`time` = '\"8 seconds\"', `web_data`.`updated_at` = '2024-05-11 17:59:16.902623' WHERE `web_data`.`id` = 102730214[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mTRANSACTION (1.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+Completed 200 OK in 15ms (Views: 0.2ms | ActiveRecord: 4.6ms | Allocations: 3416)
+
+
+Started POST "/save_web_data" for 127.0.0.1 at 2024-05-11 23:29:21 +0530
+Processing by WebdataController#save_data as */*
+  Parameters: {"id"=>102730214, "url"=>"https://www.facebook.com/", "time"=>"13 seconds", "webdatum"=>{"id"=>102730214, "url"=>"https://www.facebook.com/", "time"=>"13 seconds"}}
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 9 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:61:in `current_user'
+  [1m[36mWebData Load (0.4ms)[0m  [1m[34mSELECT `web_data`.* FROM `web_data` WHERE `web_data`.`id` = 102730214 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:10:in `save_data'
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM `web_data` WHERE `web_data`.`id` = 102730214 AND `web_data`.`id` != 102730214 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Update (2.4ms)[0m  [1m[33mUPDATE `web_data` SET `web_data`.`time` = '\"13 seconds\"', `web_data`.`updated_at` = '2024-05-11 17:59:21.903458' WHERE `web_data`.`id` = 102730214[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mTRANSACTION (1.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+Completed 200 OK in 20ms (Views: 0.2ms | ActiveRecord: 6.9ms | Allocations: 3416)
+
+
+Started POST "/save_web_data" for 127.0.0.1 at 2024-05-11 23:29:26 +0530
+Processing by WebdataController#save_data as */*
+  Parameters: {"id"=>102730214, "url"=>"https://www.facebook.com/", "time"=>"17 seconds", "webdatum"=>{"id"=>102730214, "url"=>"https://www.facebook.com/", "time"=>"17 seconds"}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 9 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:61:in `current_user'
+  [1m[36mWebData Load (0.6ms)[0m  [1m[34mSELECT `web_data`.* FROM `web_data` WHERE `web_data`.`id` = 102730214 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:10:in `save_data'
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Exists? (2.2ms)[0m  [1m[34mSELECT 1 AS one FROM `web_data` WHERE `web_data`.`id` = 102730214 AND `web_data`.`id` != 102730214 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Update (3.1ms)[0m  [1m[33mUPDATE `web_data` SET `web_data`.`time` = '\"17 seconds\"', `web_data`.`updated_at` = '2024-05-11 17:59:26.160271' WHERE `web_data`.`id` = 102730214[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mTRANSACTION (1.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+Completed 200 OK in 28ms (Views: 0.3ms | ActiveRecord: 8.9ms | Allocations: 3417)
+
+
+Started POST "/save_web_data" for 127.0.0.1 at 2024-05-11 23:29:31 +0530
+Processing by WebdataController#save_data as */*
+  Parameters: {"id"=>102730214, "url"=>"https://www.facebook.com/", "time"=>"22 seconds", "webdatum"=>{"id"=>102730214, "url"=>"https://www.facebook.com/", "time"=>"22 seconds"}}
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 9 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:61:in `current_user'
+  [1m[36mWebData Load (5.1ms)[0m  [1m[34mSELECT `web_data`.* FROM `web_data` WHERE `web_data`.`id` = 102730214 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:10:in `save_data'
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM `web_data` WHERE `web_data`.`id` = 102730214 AND `web_data`.`id` != 102730214 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Update (0.5ms)[0m  [1m[33mUPDATE `web_data` SET `web_data`.`time` = '\"22 seconds\"', `web_data`.`updated_at` = '2024-05-11 17:59:31.165845' WHERE `web_data`.`id` = 102730214[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mTRANSACTION (3.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+Completed 200 OK in 25ms (Views: 0.2ms | ActiveRecord: 12.2ms | Allocations: 3416)
+
+
+Started POST "/save_web_data" for 127.0.0.1 at 2024-05-11 23:29:36 +0530
+Processing by WebdataController#save_data as */*
+  Parameters: {"id"=>102730214, "url"=>"https://www.facebook.com/", "time"=>"22 seconds", "webdatum"=>{"id"=>102730214, "url"=>"https://www.facebook.com/", "time"=>"22 seconds"}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 9 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:61:in `current_user'
+  [1m[36mWebData Load (0.4ms)[0m  [1m[34mSELECT `web_data`.* FROM `web_data` WHERE `web_data`.`id` = 102730214 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:10:in `save_data'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM `web_data` WHERE `web_data`.`id` = 102730214 AND `web_data`.`id` != 102730214 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+Completed 200 OK in 13ms (Views: 0.2ms | ActiveRecord: 1.4ms | Allocations: 2879)
+
+
+Started POST "/save_web_data" for 127.0.0.1 at 2024-05-11 23:29:41 +0530
+Processing by WebdataController#save_data as */*
+  Parameters: {"id"=>102730214, "url"=>"https://www.facebook.com/", "time"=>"22 seconds", "webdatum"=>{"id"=>102730214, "url"=>"https://www.facebook.com/", "time"=>"22 seconds"}}
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 9 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:61:in `current_user'
+  [1m[36mWebData Load (3.5ms)[0m  [1m[34mSELECT `web_data`.* FROM `web_data` WHERE `web_data`.`id` = 102730214 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:10:in `save_data'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM `web_data` WHERE `web_data`.`id` = 102730214 AND `web_data`.`id` != 102730214 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+Completed 200 OK in 14ms (Views: 0.2ms | ActiveRecord: 5.0ms | Allocations: 2879)
+
+
+Started POST "/save_web_data" for 127.0.0.1 at 2024-05-11 23:29:46 +0530
+Processing by WebdataController#save_data as */*
+  Parameters: {"id"=>102730214, "url"=>"https://www.facebook.com/", "time"=>"22 seconds", "webdatum"=>{"id"=>102730214, "url"=>"https://www.facebook.com/", "time"=>"22 seconds"}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 9 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:61:in `current_user'
+  [1m[36mWebData Load (16.1ms)[0m  [1m[34mSELECT `web_data`.* FROM `web_data` WHERE `web_data`.`id` = 102730214 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:10:in `save_data'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Exists? (5.0ms)[0m  [1m[34mSELECT 1 AS one FROM `web_data` WHERE `web_data`.`id` = 102730214 AND `web_data`.`id` != 102730214 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mTRANSACTION (5.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+Completed 200 OK in 51ms (Views: 0.2ms | ActiveRecord: 27.3ms | Allocations: 2881)
+
+
+Started POST "/save_web_data" for 127.0.0.1 at 2024-05-11 23:29:51 +0530
+Processing by WebdataController#save_data as */*
+  Parameters: {"id"=>102730214, "url"=>"https://www.facebook.com/", "time"=>"22 seconds", "webdatum"=>{"id"=>102730214, "url"=>"https://www.facebook.com/", "time"=>"22 seconds"}}
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 9 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:61:in `current_user'
+  [1m[36mWebData Load (0.8ms)[0m  [1m[34mSELECT `web_data`.* FROM `web_data` WHERE `web_data`.`id` = 102730214 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:10:in `save_data'
+  [1m[36mTRANSACTION (1.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM `web_data` WHERE `web_data`.`id` = 102730214 AND `web_data`.`id` != 102730214 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+Completed 200 OK in 17ms (Views: 0.2ms | ActiveRecord: 4.0ms | Allocations: 2879)
+
+
+Started POST "/save_web_data" for 127.0.0.1 at 2024-05-11 23:29:56 +0530
+Processing by WebdataController#save_data as */*
+  Parameters: {"id"=>102730214, "url"=>"https://www.facebook.com/", "time"=>"22 seconds", "webdatum"=>{"id"=>102730214, "url"=>"https://www.facebook.com/", "time"=>"22 seconds"}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 9 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:61:in `current_user'
+  [1m[36mWebData Load (0.6ms)[0m  [1m[34mSELECT `web_data`.* FROM `web_data` WHERE `web_data`.`id` = 102730214 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:10:in `save_data'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM `web_data` WHERE `web_data`.`id` = 102730214 AND `web_data`.`id` != 102730214 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+Completed 200 OK in 13ms (Views: 0.2ms | ActiveRecord: 2.7ms | Allocations: 2879)
+
+
+Started POST "/save_web_data" for 127.0.0.1 at 2024-05-11 23:30:01 +0530
+Processing by WebdataController#save_data as */*
+  Parameters: {"id"=>102730214, "url"=>"https://www.facebook.com/", "time"=>"22 seconds", "webdatum"=>{"id"=>102730214, "url"=>"https://www.facebook.com/", "time"=>"22 seconds"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 9 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:61:in `current_user'
+  [1m[36mWebData Load (0.7ms)[0m  [1m[34mSELECT `web_data`.* FROM `web_data` WHERE `web_data`.`id` = 102730214 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:10:in `save_data'
+  [1m[36mTRANSACTION (1.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Exists? (46.9ms)[0m  [1m[34mSELECT 1 AS one FROM `web_data` WHERE `web_data`.`id` = 102730214 AND `web_data`.`id` != 102730214 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mTRANSACTION (2.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+Completed 200 OK in 62ms (Views: 0.2ms | ActiveRecord: 52.1ms | Allocations: 2879)
+
+
+Started POST "/save_web_data" for 127.0.0.1 at 2024-05-11 23:30:06 +0530
+Processing by WebdataController#save_data as */*
+  Parameters: {"id"=>102730214, "url"=>"https://www.facebook.com/", "time"=>"22 seconds", "webdatum"=>{"id"=>102730214, "url"=>"https://www.facebook.com/", "time"=>"22 seconds"}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 9 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:61:in `current_user'
+  [1m[36mWebData Load (0.5ms)[0m  [1m[34mSELECT `web_data`.* FROM `web_data` WHERE `web_data`.`id` = 102730214 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:10:in `save_data'
+  [1m[36mTRANSACTION (1.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Exists? (2.0ms)[0m  [1m[34mSELECT 1 AS one FROM `web_data` WHERE `web_data`.`id` = 102730214 AND `web_data`.`id` != 102730214 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+Completed 200 OK in 15ms (Views: 0.3ms | ActiveRecord: 4.5ms | Allocations: 2879)
+
+
+Started POST "/save_web_data" for 127.0.0.1 at 2024-05-11 23:30:11 +0530
+Processing by WebdataController#save_data as */*
+  Parameters: {"id"=>102730214, "url"=>"https://www.facebook.com/", "time"=>"22 seconds", "webdatum"=>{"id"=>102730214, "url"=>"https://www.facebook.com/", "time"=>"22 seconds"}}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 9 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:61:in `current_user'
+  [1m[36mWebData Load (0.4ms)[0m  [1m[34mSELECT `web_data`.* FROM `web_data` WHERE `web_data`.`id` = 102730214 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:10:in `save_data'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM `web_data` WHERE `web_data`.`id` = 102730214 AND `web_data`.`id` != 102730214 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+Completed 200 OK in 15ms (Views: 0.2ms | ActiveRecord: 2.5ms | Allocations: 2880)
+
+
+Started POST "/save_web_data" for 127.0.0.1 at 2024-05-11 23:30:16 +0530
+Processing by WebdataController#save_data as */*
+  Parameters: {"id"=>102730214, "url"=>"https://www.facebook.com/", "time"=>"22 seconds", "webdatum"=>{"id"=>102730214, "url"=>"https://www.facebook.com/", "time"=>"22 seconds"}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 9 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:61:in `current_user'
+  [1m[36mWebData Load (0.4ms)[0m  [1m[34mSELECT `web_data`.* FROM `web_data` WHERE `web_data`.`id` = 102730214 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:10:in `save_data'
+  [1m[36mTRANSACTION (2.7ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Exists? (2.1ms)[0m  [1m[34mSELECT 1 AS one FROM `web_data` WHERE `web_data`.`id` = 102730214 AND `web_data`.`id` != 102730214 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+Completed 200 OK in 15ms (Views: 0.1ms | ActiveRecord: 5.6ms | Allocations: 2879)
+
+
+Started POST "/save_web_data" for 127.0.0.1 at 2024-05-11 23:30:21 +0530
+Processing by WebdataController#save_data as */*
+  Parameters: {"id"=>102730214, "url"=>"https://www.facebook.com/", "time"=>"22 seconds", "webdatum"=>{"id"=>102730214, "url"=>"https://www.facebook.com/", "time"=>"22 seconds"}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 9 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:61:in `current_user'
+  [1m[36mWebData Load (0.4ms)[0m  [1m[34mSELECT `web_data`.* FROM `web_data` WHERE `web_data`.`id` = 102730214 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:10:in `save_data'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM `web_data` WHERE `web_data`.`id` = 102730214 AND `web_data`.`id` != 102730214 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mTRANSACTION (1.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+Completed 200 OK in 11ms (Views: 0.3ms | ActiveRecord: 2.9ms | Allocations: 2879)
+
+
+Started POST "/save_web_data" for 127.0.0.1 at 2024-05-11 23:30:26 +0530
+Processing by WebdataController#save_data as */*
+  Parameters: {"id"=>102730214, "url"=>"https://www.facebook.com/", "time"=>"22 seconds", "webdatum"=>{"id"=>102730214, "url"=>"https://www.facebook.com/", "time"=>"22 seconds"}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 9 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:61:in `current_user'
+  [1m[36mWebData Load (0.8ms)[0m  [1m[34mSELECT `web_data`.* FROM `web_data` WHERE `web_data`.`id` = 102730214 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:10:in `save_data'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM `web_data` WHERE `web_data`.`id` = 102730214 AND `web_data`.`id` != 102730214 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mTRANSACTION (2.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+Completed 200 OK in 14ms (Views: 0.2ms | ActiveRecord: 4.1ms | Allocations: 2879)
+
+
+Started POST "/save_web_data" for 127.0.0.1 at 2024-05-11 23:30:31 +0530
+Processing by WebdataController#save_data as */*
+  Parameters: {"id"=>102730214, "url"=>"https://www.facebook.com/", "time"=>"22 seconds", "webdatum"=>{"id"=>102730214, "url"=>"https://www.facebook.com/", "time"=>"22 seconds"}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 9 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:61:in `current_user'
+  [1m[36mWebData Load (2.9ms)[0m  [1m[34mSELECT `web_data`.* FROM `web_data` WHERE `web_data`.`id` = 102730214 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:10:in `save_data'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM `web_data` WHERE `web_data`.`id` = 102730214 AND `web_data`.`id` != 102730214 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+Completed 200 OK in 16ms (Views: 0.2ms | ActiveRecord: 4.7ms | Allocations: 2881)
+
+
+Started POST "/save_web_data" for 127.0.0.1 at 2024-05-11 23:30:36 +0530
+Processing by WebdataController#save_data as */*
+  Parameters: {"id"=>102730214, "url"=>"https://www.facebook.com/", "time"=>"22 seconds", "webdatum"=>{"id"=>102730214, "url"=>"https://www.facebook.com/", "time"=>"22 seconds"}}
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 9 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:61:in `current_user'
+  [1m[36mWebData Load (0.6ms)[0m  [1m[34mSELECT `web_data`.* FROM `web_data` WHERE `web_data`.`id` = 102730214 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:10:in `save_data'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Exists? (4.9ms)[0m  [1m[34mSELECT 1 AS one FROM `web_data` WHERE `web_data`.`id` = 102730214 AND `web_data`.`id` != 102730214 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+Completed 200 OK in 21ms (Views: 0.2ms | ActiveRecord: 7.6ms | Allocations: 2879)
+
+
+Started POST "/save_web_data" for 127.0.0.1 at 2024-05-11 23:30:41 +0530
+Processing by WebdataController#save_data as */*
+  Parameters: {"id"=>102730214, "url"=>"https://www.facebook.com/", "time"=>"22 seconds", "webdatum"=>{"id"=>102730214, "url"=>"https://www.facebook.com/", "time"=>"22 seconds"}}
+  [1m[36mUser Load (5.7ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 9 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:61:in `current_user'
+  [1m[36mWebData Load (3.6ms)[0m  [1m[34mSELECT `web_data`.* FROM `web_data` WHERE `web_data`.`id` = 102730214 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:10:in `save_data'
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM `web_data` WHERE `web_data`.`id` = 102730214 AND `web_data`.`id` != 102730214 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+Completed 200 OK in 58ms (Views: 0.2ms | ActiveRecord: 11.9ms | Allocations: 2879)
+
+
+Started POST "/save_web_data" for 127.0.0.1 at 2024-05-11 23:30:46 +0530
+Processing by WebdataController#save_data as */*
+  Parameters: {"id"=>102730214, "url"=>"https://www.facebook.com/", "time"=>"22 seconds", "webdatum"=>{"id"=>102730214, "url"=>"https://www.facebook.com/", "time"=>"22 seconds"}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 9 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:61:in `current_user'
+  [1m[36mWebData Load (0.4ms)[0m  [1m[34mSELECT `web_data`.* FROM `web_data` WHERE `web_data`.`id` = 102730214 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:10:in `save_data'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM `web_data` WHERE `web_data`.`id` = 102730214 AND `web_data`.`id` != 102730214 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+Completed 200 OK in 10ms (Views: 0.2ms | ActiveRecord: 2.0ms | Allocations: 2879)
+
+
+Started POST "/save_web_data" for 127.0.0.1 at 2024-05-11 23:30:51 +0530
+Processing by WebdataController#save_data as */*
+  Parameters: {"id"=>102730214, "url"=>"https://www.facebook.com/", "time"=>"22 seconds", "webdatum"=>{"id"=>102730214, "url"=>"https://www.facebook.com/", "time"=>"22 seconds"}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 9 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:61:in `current_user'
+  [1m[36mWebData Load (0.3ms)[0m  [1m[34mSELECT `web_data`.* FROM `web_data` WHERE `web_data`.`id` = 102730214 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:10:in `save_data'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM `web_data` WHERE `web_data`.`id` = 102730214 AND `web_data`.`id` != 102730214 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+Completed 200 OK in 9ms (Views: 0.2ms | ActiveRecord: 1.3ms | Allocations: 2880)
+
+
+Started POST "/save_web_data" for 127.0.0.1 at 2024-05-11 23:30:56 +0530
+Processing by WebdataController#save_data as */*
+  Parameters: {"id"=>102730214, "url"=>"https://www.facebook.com/", "time"=>"22 seconds", "webdatum"=>{"id"=>102730214, "url"=>"https://www.facebook.com/", "time"=>"22 seconds"}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 9 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:61:in `current_user'
+  [1m[36mWebData Load (3.1ms)[0m  [1m[34mSELECT `web_data`.* FROM `web_data` WHERE `web_data`.`id` = 102730214 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:10:in `save_data'
+  [1m[36mTRANSACTION (6.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Exists? (46.1ms)[0m  [1m[34mSELECT 1 AS one FROM `web_data` WHERE `web_data`.`id` = 102730214 AND `web_data`.`id` != 102730214 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mTRANSACTION (15.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+Completed 200 OK in 102ms (Views: 0.2ms | ActiveRecord: 71.0ms | Allocations: 2880)
+
+
+Started POST "/save_web_data" for 127.0.0.1 at 2024-05-11 23:31:05 +0530
+Processing by WebdataController#save_data as */*
+  Parameters: {"id"=>102730209, "url"=>"chrome://extensions/?errors=cnnekgcenaoobbfjghacdkeflghmcaon", "time"=>"", "webdatum"=>{"id"=>102730209, "url"=>"chrome://extensions/?errors=cnnekgcenaoobbfjghacdkeflghmcaon", "time"=>""}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 9 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:61:in `current_user'
+  [1m[36mWebData Load (44.4ms)[0m  [1m[34mSELECT `web_data`.* FROM `web_data` WHERE `web_data`.`id` = 102730209 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:10:in `save_data'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Exists? (13.9ms)[0m  [1m[34mSELECT 1 AS one FROM `web_data` WHERE `web_data`.`id` = 102730209 AND `web_data`.`id` != 102730209 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mTRANSACTION (16.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+Completed 200 OK in 99ms (Views: 0.3ms | ActiveRecord: 75.3ms | Allocations: 2879)
+
+
+Started POST "/save_web_data" for 127.0.0.1 at 2024-05-11 23:31:08 +0530
+Processing by WebdataController#save_data as */*
+  Parameters: {"id"=>102730210, "url"=>"https://chatgpt.com/?oai-dm=1", "time"=>"1 seconds", "webdatum"=>{"id"=>102730210, "url"=>"https://chatgpt.com/?oai-dm=1", "time"=>"1 seconds"}}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 9 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:61:in `current_user'
+  [1m[36mWebData Load (0.3ms)[0m  [1m[34mSELECT `web_data`.* FROM `web_data` WHERE `web_data`.`id` = 102730210 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:10:in `save_data'
+  [1m[36mTRANSACTION (2.8ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM `web_data` WHERE `web_data`.`id` = 102730210 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Create (0.6ms)[0m  [1m[32mINSERT INTO `web_data` (`id`, `url`, `time`, `created_at`, `updated_at`) VALUES (102730210, 'https://chatgpt.com/?oai-dm=1', '\"1 seconds\"', '2024-05-11 18:01:08.143093', '2024-05-11 18:01:08.143093')[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mTRANSACTION (2.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+Completed 200 OK in 17ms (Views: 0.3ms | ActiveRecord: 7.2ms | Allocations: 3281)
+
+
+Started POST "/save_web_data" for 127.0.0.1 at 2024-05-11 23:31:17 +0530
+Processing by WebdataController#save_data as */*
+  Parameters: {"id"=>102730210, "url"=>"chrome-extension://cnnekgcenaoobbfjghacdkeflghmcaon/redirect-website/index.html", "time"=>"11 seconds", "webdatum"=>{"id"=>102730210, "url"=>"chrome-extension://cnnekgcenaoobbfjghacdkeflghmcaon/redirect-website/index.html", "time"=>"11 seconds"}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 9 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:61:in `current_user'
+  [1m[36mWebData Load (5.9ms)[0m  [1m[34mSELECT `web_data`.* FROM `web_data` WHERE `web_data`.`id` = 102730210 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:10:in `save_data'
+  [1m[36mTRANSACTION (22.0ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM `web_data` WHERE `web_data`.`id` = 102730210 AND `web_data`.`id` != 102730210 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Update (0.7ms)[0m  [1m[33mUPDATE `web_data` SET `web_data`.`url` = 'chrome-extension://cnnekgcenaoobbfjghacdkeflghmcaon/redirect-website/index.html', `web_data`.`time` = '\"11 seconds\"', `web_data`.`updated_at` = '2024-05-11 18:01:17.687618' WHERE `web_data`.`id` = 102730210[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mTRANSACTION (3.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+Completed 200 OK in 58ms (Views: 0.2ms | ActiveRecord: 33.2ms | Allocations: 3412)
+
+
+Started POST "/save_web_data" for 127.0.0.1 at 2024-05-11 23:31:30 +0530
+Processing by WebdataController#save_data as */*
+  Parameters: {"id"=>102730210, "url"=>"https://chatgpt.com/?oai-dm=1", "time"=>"23 seconds", "webdatum"=>{"id"=>102730210, "url"=>"https://chatgpt.com/?oai-dm=1", "time"=>"23 seconds"}}
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 9 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:61:in `current_user'
+  [1m[36mWebData Load (3.2ms)[0m  [1m[34mSELECT `web_data`.* FROM `web_data` WHERE `web_data`.`id` = 102730210 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:10:in `save_data'
+  [1m[36mTRANSACTION (2.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM `web_data` WHERE `web_data`.`id` = 102730210 AND `web_data`.`id` != 102730210 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Update (1.3ms)[0m  [1m[33mUPDATE `web_data` SET `web_data`.`url` = 'https://chatgpt.com/?oai-dm=1', `web_data`.`time` = '\"23 seconds\"', `web_data`.`updated_at` = '2024-05-11 18:01:30.172983' WHERE `web_data`.`id` = 102730210[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+Completed 200 OK in 26ms (Views: 0.3ms | ActiveRecord: 9.8ms | Allocations: 3411)
+
+
+Started POST "/save_web_data" for 127.0.0.1 at 2024-05-11 23:31:35 +0530
+Processing by WebdataController#save_data as */*
+  Parameters: {"id"=>102730210, "url"=>"https://chatgpt.com/?oai-dm=1", "time"=>"26 seconds", "webdatum"=>{"id"=>102730210, "url"=>"https://chatgpt.com/?oai-dm=1", "time"=>"26 seconds"}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 9 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:61:in `current_user'
+  [1m[36mWebData Load (0.3ms)[0m  [1m[34mSELECT `web_data`.* FROM `web_data` WHERE `web_data`.`id` = 102730210 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:10:in `save_data'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM `web_data` WHERE `web_data`.`id` = 102730210 AND `web_data`.`id` != 102730210 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Update (1.9ms)[0m  [1m[33mUPDATE `web_data` SET `web_data`.`time` = '\"26 seconds\"', `web_data`.`updated_at` = '2024-05-11 18:01:35.940567' WHERE `web_data`.`id` = 102730210[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mTRANSACTION (1.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+Completed 200 OK in 17ms (Views: 0.2ms | ActiveRecord: 4.7ms | Allocations: 3416)
+
+
+Started POST "/save_web_data" for 127.0.0.1 at 2024-05-11 23:31:40 +0530
+Processing by WebdataController#save_data as */*
+  Parameters: {"id"=>102730210, "url"=>"https://chatgpt.com/?oai-dm=1", "time"=>"26 seconds", "webdatum"=>{"id"=>102730210, "url"=>"https://chatgpt.com/?oai-dm=1", "time"=>"26 seconds"}}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 9 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:61:in `current_user'
+  [1m[36mWebData Load (0.4ms)[0m  [1m[34mSELECT `web_data`.* FROM `web_data` WHERE `web_data`.`id` = 102730210 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:10:in `save_data'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM `web_data` WHERE `web_data`.`id` = 102730210 AND `web_data`.`id` != 102730210 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+Completed 200 OK in 10ms (Views: 0.2ms | ActiveRecord: 1.6ms | Allocations: 2879)
+
+
+Started POST "/save_web_data" for 127.0.0.1 at 2024-05-11 23:31:45 +0530
+Processing by WebdataController#save_data as */*
+  Parameters: {"id"=>102730210, "url"=>"https://chatgpt.com/?oai-dm=1", "time"=>"26 seconds", "webdatum"=>{"id"=>102730210, "url"=>"https://chatgpt.com/?oai-dm=1", "time"=>"26 seconds"}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 9 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:61:in `current_user'
+  [1m[36mWebData Load (0.5ms)[0m  [1m[34mSELECT `web_data`.* FROM `web_data` WHERE `web_data`.`id` = 102730210 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:10:in `save_data'
+  [1m[36mTRANSACTION (9.8ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Exists? (7.0ms)[0m  [1m[34mSELECT 1 AS one FROM `web_data` WHERE `web_data`.`id` = 102730210 AND `web_data`.`id` != 102730210 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mTRANSACTION (6.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+Completed 200 OK in 36ms (Views: 0.2ms | ActiveRecord: 24.5ms | Allocations: 2880)
+
+
+Started GET "/get_all_web_data" for 127.0.0.1 at 2024-05-11 23:31:50 +0530
+Processing by WebdataController#get_all_data as */*
+  Parameters: {"webdatum"=>{}}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 9 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:61:in `current_user'
+  [1m[36mWebData Count (1.6ms)[0m  [1m[34mSELECT COUNT(*) FROM `web_data`[0m
+  ↳ app/controllers/webdata_controller.rb:28:in `get_all_data'
+  [1m[36mWebData Load (1.1ms)[0m  [1m[34mSELECT `web_data`.* FROM `web_data`[0m
+  ↳ app/controllers/webdata_controller.rb:30:in `get_all_data'
+Completed 200 OK in 21ms (Views: 12.7ms | ActiveRecord: 3.1ms | Allocations: 5170)
+
+
+Started POST "/save_web_data" for 127.0.0.1 at 2024-05-11 23:33:57 +0530
+Processing by WebdataController#save_data as */*
+  Parameters: {"id"=>102730221, "url"=>"https://www.google.com/search?q=google+chrome+extension&oq=goo&gs_lcrp=EgZjaHJvbWUqBggAEEUYOzIGCAAQRRg7Mg4IARBFGCcYOxiABBiKBTIICAIQRRgnGDsyBggDEEUYPDIGCAQQRRg8MgYIBRBFGDwyBggGEEUYQTIGCAcQRRhB0gEIMTI4MWowajmoAgCwAgE&sourceid=chrome&ie=UTF-8", "time"=>"6 seconds", "webdatum"=>{"id"=>102730221, "url"=>"https://www.google.com/search?q=google+chrome+extension&oq=goo&gs_lcrp=EgZjaHJvbWUqBggAEEUYOzIGCAAQRRg7Mg4IARBFGCcYOxiABBiKBTIICAIQRRgnGDsyBggDEEUYPDIGCAQQRRg8MgYIBRBFGDwyBggGEEUYQTIGCAcQRRhB0gEIMTI4MWowajmoAgCwAgE&sourceid=chrome&ie=UTF-8", "time"=>"6 seconds"}}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 9 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:61:in `current_user'
+  [1m[36mWebData Load (1.5ms)[0m  [1m[34mSELECT `web_data`.* FROM `web_data` WHERE `web_data`.`id` = 102730221 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:10:in `save_data'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM `web_data` WHERE `web_data`.`id` = 102730221 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Create (0.9ms)[0m  [1m[32mINSERT INTO `web_data` (`id`, `url`, `time`, `created_at`, `updated_at`) VALUES (102730221, 'https://www.google.com/search?q=google+chrome+extension&oq=goo&gs_lcrp=EgZjaHJvbWUqBggAEEUYOzIGCAAQRRg7Mg4IARBFGCcYOxiABBiKBTIICAIQRRgnGDsyBggDEEUYPDIGCAQQRRg8MgYIBRBFGDwyBggGEEUYQTIGCAcQRRhB0gEIMTI4MWowajmoAgCwAgE&sourceid=chrome&ie=UTF-8', '\"6 seconds\"', '2024-05-11 18:03:57.587103', '2024-05-11 18:03:57.587103')[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mTRANSACTION (1.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+Completed 200 OK in 18ms (Views: 0.2ms | ActiveRecord: 5.2ms | Allocations: 3281)
+
+
+Started POST "/save_web_data" for 127.0.0.1 at 2024-05-11 23:35:08 +0530
+Processing by WebdataController#save_data as */*
+  Parameters: {"id"=>102730224, "url"=>"https://www.google.com/search?q=google+chrome+extension&oq=go&gs_lcrp=EgZjaHJvbWUqBggAEEUYOzIGCAAQRRg7Mg4IARBFGCcYOxiABBiKBTIICAIQRRgnGDsyBggDEEUYPDIGCAQQRRg8MgYIBRBFGDwyBggGEEUYPDIGCAcQRRhB0gEIMTA2N2owajSoAgCwAgE&sourceid=chrome&ie=UTF-8", "time"=>"", "webdatum"=>{"id"=>102730224, "url"=>"https://www.google.com/search?q=google+chrome+extension&oq=go&gs_lcrp=EgZjaHJvbWUqBggAEEUYOzIGCAAQRRg7Mg4IARBFGCcYOxiABBiKBTIICAIQRRgnGDsyBggDEEUYPDIGCAQQRRg8MgYIBRBFGDwyBggGEEUYPDIGCAcQRRhB0gEIMTA2N2owajSoAgCwAgE&sourceid=chrome&ie=UTF-8", "time"=>""}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 9 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:61:in `current_user'
+  [1m[36mWebData Load (1.3ms)[0m  [1m[34mSELECT `web_data`.* FROM `web_data` WHERE `web_data`.`id` = 102730224 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:10:in `save_data'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM `web_data` WHERE `web_data`.`id` = 102730224 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Create (3.8ms)[0m  [1m[32mINSERT INTO `web_data` (`id`, `url`, `time`, `created_at`, `updated_at`) VALUES (102730224, 'https://www.google.com/search?q=google+chrome+extension&oq=go&gs_lcrp=EgZjaHJvbWUqBggAEEUYOzIGCAAQRRg7Mg4IARBFGCcYOxiABBiKBTIICAIQRRgnGDsyBggDEEUYPDIGCAQQRRg8MgYIBRBFGDwyBggGEEUYPDIGCAcQRRhB0gEIMTA2N2owajSoAgCwAgE&sourceid=chrome&ie=UTF-8', '\"\"', '2024-05-11 18:05:08.132906', '2024-05-11 18:05:08.132906')[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mTRANSACTION (1.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+Completed 200 OK in 19ms (Views: 0.4ms | ActiveRecord: 7.4ms | Allocations: 3282)
+
+
+Started POST "/save_web_data" for 127.0.0.1 at 2024-05-11 23:35:21 +0530
+Processing by WebdataController#save_data as */*
+  Parameters: {"id"=>102730227, "url"=>"https://www.google.com/search?q=google+chrome+extension&oq=google&gs_lcrp=EgZjaHJvbWUqBggAEEUYOzIGCAAQRRg7Mg4IARBFGCcYOxiABBiKBTIGCAIQRRg8MgYIAxBFGDwyBggEEEUYPDIGCAUQRRhBMgYIBhBFGEEyBggHEEUYQdIBCDEwMDhqMGo3qAIAsAIA&sourceid=chrome&ie=UTF-8", "time"=>"8 seconds", "webdatum"=>{"id"=>102730227, "url"=>"https://www.google.com/search?q=google+chrome+extension&oq=google&gs_lcrp=EgZjaHJvbWUqBggAEEUYOzIGCAAQRRg7Mg4IARBFGCcYOxiABBiKBTIGCAIQRRg8MgYIAxBFGDwyBggEEEUYPDIGCAUQRRhBMgYIBhBFGEEyBggHEEUYQdIBCDEwMDhqMGo3qAIAsAIA&sourceid=chrome&ie=UTF-8", "time"=>"8 seconds"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 9 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:61:in `current_user'
+  [1m[36mWebData Load (0.8ms)[0m  [1m[34mSELECT `web_data`.* FROM `web_data` WHERE `web_data`.`id` = 102730227 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:10:in `save_data'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Exists? (1.1ms)[0m  [1m[34mSELECT 1 AS one FROM `web_data` WHERE `web_data`.`id` = 102730227 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Create (0.4ms)[0m  [1m[32mINSERT INTO `web_data` (`id`, `url`, `time`, `created_at`, `updated_at`) VALUES (102730227, 'https://www.google.com/search?q=google+chrome+extension&oq=google&gs_lcrp=EgZjaHJvbWUqBggAEEUYOzIGCAAQRRg7Mg4IARBFGCcYOxiABBiKBTIGCAIQRRg8MgYIAxBFGDwyBggEEEUYPDIGCAUQRRhBMgYIBhBFGEEyBggHEEUYQdIBCDEwMDhqMGo3qAIAsAIA&sourceid=chrome&ie=UTF-8', '\"8 seconds\"', '2024-05-11 18:05:21.176794', '2024-05-11 18:05:21.176794')[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mTRANSACTION (4.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+Completed 200 OK in 17ms (Views: 0.2ms | ActiveRecord: 7.2ms | Allocations: 3281)
+
+
+Started POST "/save_web_data" for 127.0.0.1 at 2024-05-11 23:35:26 +0530
+Processing by WebdataController#save_data as */*
+  Parameters: {"id"=>102730227, "url"=>"https://www.google.com/search?q=google+chrome+extension&oq=google&gs_lcrp=EgZjaHJvbWUqBggAEEUYOzIGCAAQRRg7Mg4IARBFGCcYOxiABBiKBTIGCAIQRRg8MgYIAxBFGDwyBggEEEUYPDIGCAUQRRhBMgYIBhBFGEEyBggHEEUYQdIBCDEwMDhqMGo3qAIAsAIA&sourceid=chrome&ie=UTF-8", "time"=>"13 seconds", "webdatum"=>{"id"=>102730227, "url"=>"https://www.google.com/search?q=google+chrome+extension&oq=google&gs_lcrp=EgZjaHJvbWUqBggAEEUYOzIGCAAQRRg7Mg4IARBFGCcYOxiABBiKBTIGCAIQRRg8MgYIAxBFGDwyBggEEEUYPDIGCAUQRRhBMgYIBhBFGEEyBggHEEUYQdIBCDEwMDhqMGo3qAIAsAIA&sourceid=chrome&ie=UTF-8", "time"=>"13 seconds"}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 9 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:61:in `current_user'
+  [1m[36mWebData Load (0.6ms)[0m  [1m[34mSELECT `web_data`.* FROM `web_data` WHERE `web_data`.`id` = 102730227 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:10:in `save_data'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM `web_data` WHERE `web_data`.`id` = 102730227 AND `web_data`.`id` != 102730227 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Update (0.5ms)[0m  [1m[33mUPDATE `web_data` SET `web_data`.`time` = '\"13 seconds\"', `web_data`.`updated_at` = '2024-05-11 18:05:26.169484' WHERE `web_data`.`id` = 102730227[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mTRANSACTION (2.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+Completed 200 OK in 14ms (Views: 0.2ms | ActiveRecord: 3.9ms | Allocations: 3416)
+
+
+Started POST "/save_web_data" for 127.0.0.1 at 2024-05-11 23:35:31 +0530
+Processing by WebdataController#save_data as */*
+  Parameters: {"id"=>102730227, "url"=>"https://www.google.com/search?q=google+chrome+extension&oq=google&gs_lcrp=EgZjaHJvbWUqBggAEEUYOzIGCAAQRRg7Mg4IARBFGCcYOxiABBiKBTIGCAIQRRg8MgYIAxBFGDwyBggEEEUYPDIGCAUQRRhBMgYIBhBFGEEyBggHEEUYQdIBCDEwMDhqMGo3qAIAsAIA&sourceid=chrome&ie=UTF-8", "time"=>"18 seconds", "webdatum"=>{"id"=>102730227, "url"=>"https://www.google.com/search?q=google+chrome+extension&oq=google&gs_lcrp=EgZjaHJvbWUqBggAEEUYOzIGCAAQRRg7Mg4IARBFGCcYOxiABBiKBTIGCAIQRRg8MgYIAxBFGDwyBggEEEUYPDIGCAUQRRhBMgYIBhBFGEEyBggHEEUYQdIBCDEwMDhqMGo3qAIAsAIA&sourceid=chrome&ie=UTF-8", "time"=>"18 seconds"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 9 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:61:in `current_user'
+  [1m[36mWebData Load (0.7ms)[0m  [1m[34mSELECT `web_data`.* FROM `web_data` WHERE `web_data`.`id` = 102730227 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:10:in `save_data'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Exists? (1.4ms)[0m  [1m[34mSELECT 1 AS one FROM `web_data` WHERE `web_data`.`id` = 102730227 AND `web_data`.`id` != 102730227 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Update (0.8ms)[0m  [1m[33mUPDATE `web_data` SET `web_data`.`time` = '\"18 seconds\"', `web_data`.`updated_at` = '2024-05-11 18:05:31.186872' WHERE `web_data`.`id` = 102730227[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mTRANSACTION (1.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+Completed 200 OK in 15ms (Views: 0.1ms | ActiveRecord: 5.0ms | Allocations: 3416)
+
+
+Started POST "/save_web_data" for 127.0.0.1 at 2024-05-11 23:35:36 +0530
+Processing by WebdataController#save_data as */*
+  Parameters: {"id"=>102730230, "url"=>"chrome-extension://cnnekgcenaoobbfjghacdkeflghmcaon/redirect-website/index.html", "time"=>"4 seconds", "webdatum"=>{"id"=>102730230, "url"=>"chrome-extension://cnnekgcenaoobbfjghacdkeflghmcaon/redirect-website/index.html", "time"=>"4 seconds"}}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 9 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:61:in `current_user'
+  [1m[36mWebData Load (1.0ms)[0m  [1m[34mSELECT `web_data`.* FROM `web_data` WHERE `web_data`.`id` = 102730230 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:10:in `save_data'
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM `web_data` WHERE `web_data`.`id` = 102730230 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Create (2.0ms)[0m  [1m[32mINSERT INTO `web_data` (`id`, `url`, `time`, `created_at`, `updated_at`) VALUES (102730230, 'chrome-extension://cnnekgcenaoobbfjghacdkeflghmcaon/redirect-website/index.html', '\"4 seconds\"', '2024-05-11 18:05:36.865407', '2024-05-11 18:05:36.865407')[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+Completed 200 OK in 18ms (Views: 0.2ms | ActiveRecord: 5.5ms | Allocations: 3282)
+
+
+Started POST "/save_web_data" for 127.0.0.1 at 2024-05-11 23:35:45 +0530
+Processing by WebdataController#save_data as */*
+  Parameters: {"id"=>102730224, "url"=>"https://www.google.com/search?q=google+chrome+extension&oq=go&gs_lcrp=EgZjaHJvbWUqBggAEEUYOzIGCAAQRRg7Mg4IARBFGCcYOxiABBiKBTIICAIQRRgnGDsyBggDEEUYPDIGCAQQRRg8MgYIBRBFGDwyBggGEEUYPDIGCAcQRRhB0gEIMTA2N2owajSoAgCwAgE&sourceid=chrome&ie=UTF-8", "time"=>"2 seconds", "webdatum"=>{"id"=>102730224, "url"=>"https://www.google.com/search?q=google+chrome+extension&oq=go&gs_lcrp=EgZjaHJvbWUqBggAEEUYOzIGCAAQRRg7Mg4IARBFGCcYOxiABBiKBTIICAIQRRgnGDsyBggDEEUYPDIGCAQQRRg8MgYIBRBFGDwyBggGEEUYPDIGCAcQRRhB0gEIMTA2N2owajSoAgCwAgE&sourceid=chrome&ie=UTF-8", "time"=>"2 seconds"}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 9 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:61:in `current_user'
+  [1m[36mWebData Load (0.5ms)[0m  [1m[34mSELECT `web_data`.* FROM `web_data` WHERE `web_data`.`id` = 102730224 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:10:in `save_data'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM `web_data` WHERE `web_data`.`id` = 102730224 AND `web_data`.`id` != 102730224 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Update (0.5ms)[0m  [1m[33mUPDATE `web_data` SET `web_data`.`time` = '\"2 seconds\"', `web_data`.`updated_at` = '2024-05-11 18:05:45.137184' WHERE `web_data`.`id` = 102730224[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mTRANSACTION (1.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+Completed 200 OK in 14ms (Views: 0.2ms | ActiveRecord: 3.7ms | Allocations: 3416)
+
+
+Started POST "/save_web_data" for 127.0.0.1 at 2024-05-11 23:35:50 +0530
+Processing by WebdataController#save_data as */*
+  Parameters: {"id"=>102730224, "url"=>"https://www.google.com/search?q=google+chrome+extension&oq=go&gs_lcrp=EgZjaHJvbWUqBggAEEUYOzIGCAAQRRg7Mg4IARBFGCcYOxiABBiKBTIICAIQRRgnGDsyBggDEEUYPDIGCAQQRRg8MgYIBRBFGDwyBggGEEUYPDIGCAcQRRhB0gEIMTA2N2owajSoAgCwAgE&sourceid=chrome&ie=UTF-8", "time"=>"4 seconds", "webdatum"=>{"id"=>102730224, "url"=>"https://www.google.com/search?q=google+chrome+extension&oq=go&gs_lcrp=EgZjaHJvbWUqBggAEEUYOzIGCAAQRRg7Mg4IARBFGCcYOxiABBiKBTIICAIQRRgnGDsyBggDEEUYPDIGCAQQRRg8MgYIBRBFGDwyBggGEEUYPDIGCAcQRRhB0gEIMTA2N2owajSoAgCwAgE&sourceid=chrome&ie=UTF-8", "time"=>"4 seconds"}}
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 9 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:61:in `current_user'
+  [1m[36mWebData Load (3.7ms)[0m  [1m[34mSELECT `web_data`.* FROM `web_data` WHERE `web_data`.`id` = 102730224 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:10:in `save_data'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Exists? (7.6ms)[0m  [1m[34mSELECT 1 AS one FROM `web_data` WHERE `web_data`.`id` = 102730224 AND `web_data`.`id` != 102730224 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Update (0.9ms)[0m  [1m[33mUPDATE `web_data` SET `web_data`.`time` = '\"4 seconds\"', `web_data`.`updated_at` = '2024-05-11 18:05:50.714851' WHERE `web_data`.`id` = 102730224[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mTRANSACTION (1.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+Completed 200 OK in 35ms (Views: 0.6ms | ActiveRecord: 15.3ms | Allocations: 3416)
+
+
+Started POST "/save_web_data" for 127.0.0.1 at 2024-05-11 23:35:55 +0530
+Processing by WebdataController#save_data as */*
+  Parameters: {"id"=>102730224, "url"=>"https://www.google.com/search?q=google+chrome+extension&oq=go&gs_lcrp=EgZjaHJvbWUqBggAEEUYOzIGCAAQRRg7Mg4IARBFGCcYOxiABBiKBTIICAIQRRgnGDsyBggDEEUYPDIGCAQQRRg8MgYIBRBFGDwyBggGEEUYPDIGCAcQRRhB0gEIMTA2N2owajSoAgCwAgE&sourceid=chrome&ie=UTF-8", "time"=>"4 seconds", "webdatum"=>{"id"=>102730224, "url"=>"https://www.google.com/search?q=google+chrome+extension&oq=go&gs_lcrp=EgZjaHJvbWUqBggAEEUYOzIGCAAQRRg7Mg4IARBFGCcYOxiABBiKBTIICAIQRRgnGDsyBggDEEUYPDIGCAQQRRg8MgYIBRBFGDwyBggGEEUYPDIGCAcQRRhB0gEIMTA2N2owajSoAgCwAgE&sourceid=chrome&ie=UTF-8", "time"=>"4 seconds"}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 9 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:61:in `current_user'
+  [1m[36mWebData Load (0.5ms)[0m  [1m[34mSELECT `web_data`.* FROM `web_data` WHERE `web_data`.`id` = 102730224 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:10:in `save_data'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM `web_data` WHERE `web_data`.`id` = 102730224 AND `web_data`.`id` != 102730224 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mTRANSACTION (3.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+Completed 200 OK in 16ms (Views: 0.2ms | ActiveRecord: 5.0ms | Allocations: 2879)
+
+
+Started POST "/login" for 127.0.0.1 at 2024-05-11 23:36:21 +0530
+Processing by AuthenticationController#login as */*
+  Parameters: {"email"=>"demo@gmail.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"demo@gmail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'demo@gmail.com' LIMIT 1[0m
+  ↳ app/controllers/authentication_controller.rb:4:in `login'
+Completed 200 OK in 237ms (Views: 0.1ms | ActiveRecord: 0.4ms | Allocations: 568)
+
+
+Started POST "/save_web_data" for 127.0.0.1 at 2024-05-11 23:36:21 +0530
+Processing by WebdataController#save_data as */*
+  Parameters: {"id"=>102730236, "url"=>"https://www.google.com/search?q=google+chrome+extension&oq=go&gs_lcrp=EgZjaHJvbWUqBggAEEUYOzIGCAAQRRg7Mg4IARBFGCcYOxiABBiKBTIICAIQRRgnGDsyBggDEEUYPDIGCAQQRRg8MgYIBRBFGDwyBggGEEUYPDIGCAcQRRhB0gEHNzM2ajBqN6gCALACAA&sourceid=chrome&ie=UTF-8", "time"=>"14 seconds", "webdatum"=>{"id"=>102730236, "url"=>"https://www.google.com/search?q=google+chrome+extension&oq=go&gs_lcrp=EgZjaHJvbWUqBggAEEUYOzIGCAAQRRg7Mg4IARBFGCcYOxiABBiKBTIICAIQRRgnGDsyBggDEEUYPDIGCAQQRRg8MgYIBRBFGDwyBggGEEUYPDIGCAcQRRhB0gEHNzM2ajBqN6gCALACAA&sourceid=chrome&ie=UTF-8", "time"=>"14 seconds"}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 9 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:61:in `current_user'
+  [1m[36mWebData Load (0.3ms)[0m  [1m[34mSELECT `web_data`.* FROM `web_data` WHERE `web_data`.`id` = 102730236 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:10:in `save_data'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM `web_data` WHERE `web_data`.`id` = 102730236 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Create (0.6ms)[0m  [1m[32mINSERT INTO `web_data` (`id`, `url`, `time`, `created_at`, `updated_at`) VALUES (102730236, 'https://www.google.com/search?q=google+chrome+extension&oq=go&gs_lcrp=EgZjaHJvbWUqBggAEEUYOzIGCAAQRRg7Mg4IARBFGCcYOxiABBiKBTIICAIQRRgnGDsyBggDEEUYPDIGCAQQRRg8MgYIBRBFGDwyBggGEEUYPDIGCAcQRRhB0gEHNzM2ajBqN6gCALACAA&sourceid=chrome&ie=UTF-8', '\"14 seconds\"', '2024-05-11 18:06:21.376258', '2024-05-11 18:06:21.376258')[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mTRANSACTION (98.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+Completed 200 OK in 111ms (Views: 0.2ms | ActiveRecord: 100.5ms | Allocations: 3283)
+
+
+Started POST "/save_web_data" for 127.0.0.1 at 2024-05-11 23:36:25 +0530
+Processing by WebdataController#save_data as */*
+  Parameters: {"id"=>102730236, "url"=>"https://www.google.com/search?q=google+chrome+extension&oq=go&gs_lcrp=EgZjaHJvbWUqBggAEEUYOzIGCAAQRRg7Mg4IARBFGCcYOxiABBiKBTIICAIQRRgnGDsyBggDEEUYPDIGCAQQRRg8MgYIBRBFGDwyBggGEEUYPDIGCAcQRRhB0gEHNzM2ajBqN6gCALACAA&sourceid=chrome&ie=UTF-8", "time"=>"18 seconds", "webdatum"=>{"id"=>102730236, "url"=>"https://www.google.com/search?q=google+chrome+extension&oq=go&gs_lcrp=EgZjaHJvbWUqBggAEEUYOzIGCAAQRRg7Mg4IARBFGCcYOxiABBiKBTIICAIQRRgnGDsyBggDEEUYPDIGCAQQRRg8MgYIBRBFGDwyBggGEEUYPDIGCAcQRRhB0gEHNzM2ajBqN6gCALACAA&sourceid=chrome&ie=UTF-8", "time"=>"18 seconds"}}
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 9 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:61:in `current_user'
+  [1m[36mWebData Load (1.7ms)[0m  [1m[34mSELECT `web_data`.* FROM `web_data` WHERE `web_data`.`id` = 102730236 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:10:in `save_data'
+  [1m[36mTRANSACTION (1.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM `web_data` WHERE `web_data`.`id` = 102730236 AND `web_data`.`id` != 102730236 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Update (0.7ms)[0m  [1m[33mUPDATE `web_data` SET `web_data`.`time` = '\"18 seconds\"', `web_data`.`updated_at` = '2024-05-11 18:06:25.616671' WHERE `web_data`.`id` = 102730236[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mTRANSACTION (2.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+Completed 200 OK in 27ms (Views: 0.3ms | ActiveRecord: 7.8ms | Allocations: 3416)
+
+
+Started POST "/save_web_data" for 127.0.0.1 at 2024-05-11 23:36:34 +0530
+Processing by WebdataController#save_data as */*
+  Parameters: {"id"=>102730236, "url"=>"https://www.google.com/search?q=google+chrome+extension&oq=go&gs_lcrp=EgZjaHJvbWUqBggAEEUYOzIGCAAQRRg7Mg4IARBFGCcYOxiABBiKBTIICAIQRRgnGDsyBggDEEUYPDIGCAQQRRg8MgYIBRBFGDwyBggGEEUYPDIGCAcQRRhB0gEHNzM2ajBqN6gCALACAA&sourceid=chrome&ie=UTF-8", "time"=>"", "webdatum"=>{"id"=>102730236, "url"=>"https://www.google.com/search?q=google+chrome+extension&oq=go&gs_lcrp=EgZjaHJvbWUqBggAEEUYOzIGCAAQRRg7Mg4IARBFGCcYOxiABBiKBTIICAIQRRgnGDsyBggDEEUYPDIGCAQQRRg8MgYIBRBFGDwyBggGEEUYPDIGCAcQRRhB0gEHNzM2ajBqN6gCALACAA&sourceid=chrome&ie=UTF-8", "time"=>""}}
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 9 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:61:in `current_user'
+  [1m[36mWebData Load (3.9ms)[0m  [1m[34mSELECT `web_data`.* FROM `web_data` WHERE `web_data`.`id` = 102730236 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:10:in `save_data'
+  [1m[36mTRANSACTION (4.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM `web_data` WHERE `web_data`.`id` = 102730236 AND `web_data`.`id` != 102730236 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Update (2.1ms)[0m  [1m[33mUPDATE `web_data` SET `web_data`.`time` = '\"\"', `web_data`.`updated_at` = '2024-05-11 18:06:34.584776' WHERE `web_data`.`id` = 102730236[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mTRANSACTION (1.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+Completed 200 OK in 32ms (Views: 0.4ms | ActiveRecord: 13.3ms | Allocations: 3416)
+
+
+Started POST "/save_web_data" for 127.0.0.1 at 2024-05-11 23:36:45 +0530
+Processing by WebdataController#save_data as */*
+  Parameters: {"id"=>102730236, "url"=>"chrome-extension://cnnekgcenaoobbfjghacdkeflghmcaon/redirect-website/index.html", "time"=>"", "webdatum"=>{"id"=>102730236, "url"=>"chrome-extension://cnnekgcenaoobbfjghacdkeflghmcaon/redirect-website/index.html", "time"=>""}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT `users`.* FROM `users` WHERE `users`.`id` = 9 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:61:in `current_user'
+  [1m[36mWebData Load (0.4ms)[0m  [1m[34mSELECT `web_data`.* FROM `web_data` WHERE `web_data`.`id` = 102730236 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:10:in `save_data'
+  [1m[36mTRANSACTION (3.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Exists? (1.6ms)[0m  [1m[34mSELECT 1 AS one FROM `web_data` WHERE `web_data`.`id` = 102730236 AND `web_data`.`id` != 102730236 LIMIT 1[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mWebData Update (0.7ms)[0m  [1m[33mUPDATE `web_data` SET `web_data`.`url` = 'chrome-extension://cnnekgcenaoobbfjghacdkeflghmcaon/redirect-website/index.html', `web_data`.`updated_at` = '2024-05-11 18:06:45.572805' WHERE `web_data`.`id` = 102730236[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+  [1m[36mTRANSACTION (39.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/webdata_controller.rb:16:in `save_data'
+Completed 200 OK in 132ms (Views: 0.2ms | ActiveRecord: 45.6ms | Allocations: 3406)
+
+

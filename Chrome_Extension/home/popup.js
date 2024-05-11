@@ -13,15 +13,15 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
 
-    var button = document.getElementById('clickMeButton');
+    // var button = document.getElementById('clickMeButton');
     
-    button.addEventListener('click', function() {
-      // Example: Change the text of the button when clicked
-      console.log("button cliecked");
-      button.textContent = 'Button Clicked!';
+    // button.addEventListener('click', function() {
+    //   // Example: Change the text of the button when clicked
+    //   console.log("button cliecked");
+    //   button.textContent = 'Button Clicked!';
       
-      // You can add more functionality here, such as sending messages to content scripts or background scripts,
-      // modifying the DOM of the current tab, etc.
-    });
+    //   // You can add more functionality here, such as sending messages to content scripts or background scripts,
+    //   // modifying the DOM of the current tab, etc.
+    // });
   });
   
