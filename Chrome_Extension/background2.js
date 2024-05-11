@@ -1,8 +1,6 @@
 let activeTabId = null;
 let tabTimes = {};
 
-
-
 chrome.tabs.onActivated.addListener(activeInfo => {
   activeTabId = activeInfo.tabId;
   if (!tabTimes[activeTabId]) {
@@ -46,43 +44,13 @@ var blockedURLsSaved;
 
 // Listen for messages from content scripts
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
-  // Check if the message is to block or unblock a URL
-  if (message.action === 'blockUrl') {
-    // Check if the URL is not already in the list of blocked URLs
-    if (!blockedURLsSaved.includes(message.url)) {
-      // Add the URL to the list of blocked URLs
-      blockedURLs.push(message.url);
-      // Update the list of blocked URLs in Chrome Storage
-      updateBlockedURLs(blockedURLs);
-    }
-  } else if (message.action === 'unblockUrl') {
-    // Find the index of the URL in the list of blocked URLs
-    var index = blockedURLsSaved.indexOf(message.url);
-    // Check if the URL exists in the list of blocked URLs
-    if (index !== -1) {
-      // Remove the URL from the list of blocked URLs
-      blockedURLs.splice(index, 1);
-      // Update the list of blocked URLs in Chrome Storage
-      updateBlockedURLs(blockedURLs);
-    }
-  }
-
-  // Load the list of blocked URLs from Chrome Storage
   getBlockedURLsFromStorage(function (storedBlockedURLs) {
     // Initialize the blockedURLs array with the stored data
     blockedURLsSaved = storedBlockedURLs;
+    websiteBlocker();
   });
 
-  websiteBlocker(message.action);
 });
-
-// Function to update the list of blocked URLs in Chrome Storage
-function updateBlockedURLs(blockedURLs) {
-  // Store the updated list of blocked URLs in Chrome Storage
-  chrome.storage.local.set({ blockedURLs: blockedURLs }, function () {
-  });
-}
-
 
 // Function to retrieve the list of blocked URLs from Chrome Storage
 function getBlockedURLsFromStorage(callback) {
@@ -92,11 +60,7 @@ function getBlockedURLsFromStorage(callback) {
   });
 }
 
-
-
-
-
-const websiteBlocker = (type) => {
+const websiteBlocker = () => {
   if (blockedURLsSaved !== undefined | null) {
     var updatedList = [];
     // Convert single quotes to double quotes
@@ -108,18 +72,7 @@ const websiteBlocker = (type) => {
     // Define your blocked URLs
     const blockedUrls = blockedURLsSaved;
     // Define your rules for the declarativeNetRequest API
-    let rules = {};
-    if (type === 'unblockUrl') {
-      console.log('type', type)
-      // Example usage to unblock URLs
-      rules = generateRules(blockedUrls, 'allow');
-    } else {
-      rules = generateRules(blockedUrls, 'block');
-    }
-
-
-    console.log(rules)
-
+    let rules = generateRules(blockedUrls, 'block');
     // Add your rules
     chrome.declarativeNetRequest.updateDynamicRules({
       addRules: rules
@@ -127,12 +80,17 @@ const websiteBlocker = (type) => {
 
     // Listen for when a tab is updated
     chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-      const tabHostname = new URL(tab.url).hostname;
-      const isBlocked = blockedUrls.some(blockedUrl => tabHostname.endsWith(blockedUrl));
-      if (isBlocked) {
-        // Redirect to error page
-        chrome.tabs.update(tabId, { url: "redirect-website/index.html" });
-      }
+      getBlockedURLsFromStorage(function (storedBlockedURLs) {
+        // Initialize the blockedURLs array with the stored data
+        blockedURLsSaved = storedBlockedURLs;
+        const tabHostname = new URL(tab.url).hostname;
+        const isBlocked = blockedURLsSaved.some(blockedUrl => tabHostname.endsWith(blockedUrl));
+        if (isBlocked) {
+          // Redirect to error page
+          chrome.tabs.update(tabId, { url: "redirect-website/index.html" });
+        }
+      });
+
     });
 
   }
@@ -151,4 +109,4 @@ function generateRules(blockedUrls, actionType) {
   }));
 }
 
-websiteBlocker('blockUrl');
+// websiteBlocker();

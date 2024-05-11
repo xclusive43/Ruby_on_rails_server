@@ -6,10 +6,10 @@
         "condition": {"urlFilter":"*://*doubleclick.net/*"}
     },
     {
-        "id": 2,
+        "id": 7,
         "priority": 1,
         "action": {"type": "block"},
-        "condition": {"urlFilter":"*://googleadsservices.com/*"}
+        "condition": {"urlFilter":"*://*hatgpt.com/*"}
     },
     {
         "id": 3,

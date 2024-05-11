@@ -12,7 +12,7 @@
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      width: 300px;
+      width: 350px;
     }
 
     .header {
@@ -43,11 +43,15 @@
       font-size: 20px;
     }
 
-    #timeList {
+    #timeList #blocktimeList {
       list-style-type: none;
       padding: 0;
       margin: 10px auto;
       max-width: 600px;
+    }
+    #blocktimeList li {
+      padding: 10px;
+      border-bottom: 1px solid #ccc;
     }
 
     #timeList li {
@@ -55,8 +59,16 @@
       border-bottom: 1px solid #ccc;
     }
 
+    #blocktimeList li:last-child {
+      border-bottom: none;
+    }
+
     #timeList li:last-child {
       border-bottom: none;
+    }
+    #blocktimeList li span {
+      font-weight: bold;
+      color: #333;
     }
 
     #timeList li span {
@@ -125,6 +137,13 @@
       /* Enable vertical scrolling */
       max-height: 200px;
       /* Set maximum height for the container */
+
+       /* Set maximum height for the container */
+       .accordion-labels {
+                margin-left: 10px;
+                font-size: 10px;
+                color: red;
+            }
     }
 
   </style>
@@ -155,7 +174,13 @@
   </div>
 
   <div class="scrollable-container">
+    <span class="accordion-labels">Un Block Urls</span>
     <ul id="timeList"></ul>
+  </div>
+
+  <div class="scrollable-container">
+    <span class="accordion-labels">Block Urls</span>
+    <ul id="blocktimeList"></ul>
   </div>
   <div class="footer">
     SiteSentry

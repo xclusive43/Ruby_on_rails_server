@@ -13,12 +13,10 @@ function fetchData() {
         activeTabId = response;
 
       }
-      console.log('Active Tab ID:', activeTabId);
     });
 
     // Send message to background script to get tab times
     chrome.runtime.sendMessage({ cmd: 'getTabTimes' }, function (response) {
-      console.log('Atab:', response);
       // Object to store tab URLs and their times
       var urlTimes = {};
       var renderTimes = {};
@@ -65,7 +63,6 @@ function renderTabData(tabData) {
     var listItem = document.createElement("li");
     var value = id.split(' ');
 
-
     var duration = calculateDuration(value[0] * 1000); // Convert seconds to milliseconds
     if (value[1] == activeTabId) {
       listItem.style.backgroundColor = '#00ffa6'; // green background
@@ -77,17 +74,10 @@ function renderTabData(tabData) {
     }
 
     listItem.textContent = url + ': ' + formatDuration(duration);
-
     // Create the "Block" button
     var blockButton = document.createElement("button");
-    var unBlockButton = document.createElement("button");
-
     blockButton.textContent = "Block";
-    unBlockButton.textContent = "Un-Block";
-
     blockButton.classList.add("blockButton");
-    unBlockButton.classList.add("blockButton");
-
     // Apply CSS styles directly
     blockButton.style.fontSize = "10px"; // Set font size to 10px
     blockButton.style.border = "none";
@@ -97,7 +87,34 @@ function renderTabData(tabData) {
     blockButton.style.padding = "5px 10px";
     blockButton.style.borderRadius = "5px";
     blockButton.style.cursor = "pointer";
+    // Add click event listener to the "Block" button
+    blockButton.addEventListener("click", function (event) {
+      var urlToBlock = url; //'https://example.com/url_to_block';
+      if (!blockedURLsSaved.includes(urlToBlock)) {
+      blockedURLs.push(urlToBlock);
+      updateBlockedURLs(blockedURLs, 'blockUrl',urlToBlock);
+      }  
+    });
+    // Append the "Block" button to the list item
+    listItem.appendChild(blockButton);;
+    timeList.appendChild(listItem);
+  });
+}
 
+function renderBlockUrls(blockedURLList) {
+  var timeList = document.getElementById("blocktimeList");
+  timeList.innerHTML = ''; // Clear previous data
+
+  Object.entries(blockedURLList).forEach(([id,url]) => {
+    var listItem = document.createElement("li");
+      listItem.style.backgroundColor = '#ededed'; // Light red background
+      listItem.style.color = '#666666';
+
+    listItem.textContent = url;
+    // Create the "unBlock" button
+    var unBlockButton = document.createElement("button");
+    unBlockButton.textContent = "Un-Block";
+    unBlockButton.classList.add("blockButton");
     unBlockButton.style.fontSize = "10px"; // Set font size to 10px
     unBlockButton.style.border = "none";
     unBlockButton.style.marginLeft = "20px";
@@ -107,43 +124,23 @@ function renderTabData(tabData) {
     unBlockButton.style.borderRadius = "5px";
     unBlockButton.style.cursor = "pointer";
 
-    // Add click event listener to the "Block" button
-    blockButton.addEventListener("click", function (event) {
-      // Execute your function when the "Block" button is clicked
-      console.log("Block button clicked for URL: " + url);
-
-      // Get the URL associated with this button (replace 'url' with the actual URL)
-    var urlToBlock = url ; //'https://example.com/url_to_block';
-    
-    // Send a message to the background script with the URL to block
-    chrome.runtime.sendMessage({ action: 'blockUrl', url: urlToBlock });
-    });
-
-    // Add click event listener to the "Block" button
     unBlockButton.addEventListener("click", function (event) {
-      // Execute your function when the "Block" button is clicked
-      console.log("UnBlock button clicked for URL: " + url);
-
-      // Get the URL associated with this button (replace 'url' with the actual URL)
-    var urlToBlock = url ; //'https://example.com/url_to_block';
-    
-    // Send a message to the background script with the URL to block
-    chrome.runtime.sendMessage({ action: 'unblockUrl', url: urlToBlock });
+      getBlockedURLsFromStorage(function (storedBlockedURLs) {
+        blockedURLsSaved = storedBlockedURLs;
+      });
+      var urlToBlock = url; //'https://example.com/url_to_block';
+      var index = blockedURLsSaved.indexOf(urlToBlock);
+      // Check if the URL exists in the list of blocked URLs
+      if (index !== -1) {
+        blockedURLs.splice(index, 1);
+        updateBlockedURLs(blockedURLs,'unblockUrl',urlToBlock);
+      }
     });
 
     // Append the "Block" button to the list item
-    listItem.appendChild(blockButton);
     listItem.appendChild(unBlockButton);
     timeList.appendChild(listItem);
-
   });
-
-}
-
-// Function to execute when the "Block" button is clicked
-function blockButtonClicked() {
-  // Add your code here to handle the block action
-  console.log("Block button clicked!");
 }
 
 // Function to format the duration
@@ -230,7 +227,6 @@ function sendTabDataToServer(timeList) {
           url: activeTab.url,
           time: formatDuration(duration) // Add the current time
         };
-        // console.log(tabData)
         // Send tab data to the server
         fetch("http://127.0.0.1:3000/save_web_data", {
           method: "POST",
@@ -274,7 +270,6 @@ var tabData = {};
 // Fetch data on component mount and start interval
 startInterval();
 
-
 document.getElementById('logoutBtn').addEventListener('click', function () {
   var logoutConfirmed = confirm("Are you sure you want to logout?");
   if (logoutConfirmed) {
@@ -283,14 +278,11 @@ document.getElementById('logoutBtn').addEventListener('click', function () {
       window.location.href = '../home/popup.html';
       console.log('User data removed from sync storage');
     });
-    // Perform logout action
-    // Replace with your logout function
   } else {
     // User canceled logout
     alert("Logout Canceled!");
   }
 });
-
 
 // Function to show the dialog
 function showDialog() {
@@ -363,3 +355,110 @@ document.getElementById('settingsIcon').addEventListener('click', function () {
 
 
 
+//URL Blocking Logic
+// Array to store blocked URLs
+var blockedURLs = [];
+var blockedURLsSaved = [];
+// Listen for messages from content scripts
+
+// Function to update the list of blocked URLs in Chrome Storage
+function updateBlockedURLs(blockedURLs,actionType,urlToBlock) {
+  // Store the updated list of blocked URLs in Chrome Storage
+  chrome.storage.local.set({ blockedURLs: blockedURLs }, function () {
+    getBlockedURLsFromStorage(function (storedBlockedURLs) {
+      blockedURLsSaved = storedBlockedURLs;
+      chrome.runtime.sendMessage({ action: actionType, url: urlToBlock });
+    }); 
+  });
+}
+
+// Function to retrieve the list of blocked URLs from Chrome Storage
+function getBlockedURLsFromStorage(callback) {
+  chrome.storage.local.get('blockedURLs', function (data) {
+    var storedBlockedURLs = data.blockedURLs || [];
+    callback(storedBlockedURLs);
+    //show in ui the block list of url
+    renderBlockUrls(storedBlockedURLs);
+    chrome.runtime.sendMessage({ action: 'blockUrl', url: '' });
+  });    
+}
+
+function websiteAction(url, type) {
+  if (blockedURLsSaved !== undefined | null) {
+    var updatedList = [];
+    // Convert single quotes to double quotes
+    blockedURLsSaved?.map(function (item) {
+      return updatedList.push(item);
+    });
+
+    blockedURLsSaved = updatedList;
+    // Define your blocked URLs
+    const blockedUrls = blockedURLsSaved;
+    // Define your rules for the declarativeNetRequest API
+    let rules = {};
+    // Example usage to unblock URLs
+    if (type === 'unblockUrl') {
+      rules = generateRulesAction(url, 'allow');
+    }
+    if (type === 'blockUrl') {
+      rules = generateRulesActiontoUnblock(url, 'block');
+    }
+    // Add your rules
+    chrome.declarativeNetRequest.updateDynamicRules({
+      addRules: rules
+    });
+   
+
+    // Listen for when a tab is updated
+    chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+      const tabHostname = new URL(tab.url).hostname;
+      const isBlocked = blockedUrls.some(blockedUrl => tabHostname.endsWith(blockedUrl));
+      if (isBlocked) {
+        // Redirect to error page
+        chrome.tabs.update(tabId, { url: "redirect-website/index.html" });
+      } else{
+        // Open a new tab with your URL
+          
+      }
+    });
+  } 
+  if(type === 'unblockUrl'){
+    chrome.tabs.update(activeTabId, { url:url });
+  }
+}
+
+// Function to generate rules for blocking and unblocking URLs
+function generateRulesAction(urls, actionType) {
+  return [{
+    id: generateSixDigitUUID(), // Generate a unique ID based on the current time
+    priority: 1,
+    action: { type: actionType }, // 'block' for blocking, 'unblock' for unblocking
+    condition: {
+      urlFilter: urls,
+      resourceTypes: ['main_frame']
+    }
+  }];
+}
+
+function generateRulesActiontoUnblock(urls, actionType) {
+  return [{
+    id: generateSixDigitUUID(), // Generate a unique ID based on the current time
+    priority: 1,
+    action: { type: actionType }, // 'block' for blocking, 'unblock' for unblocking
+    condition: {
+      urlFilter: urls,
+      resourceTypes: ['main_frame']
+    }
+  }];
+}
+
+
+function generateSixDigitUUID() {
+// Generate a random number between 100000 and 999999 (inclusive)
+return Math.floor(Math.random() * 900000) + 100000;
+}
+
+
+getBlockedURLsFromStorage(function (storedBlockedURLs) {
+  blockedURLsSaved = storedBlockedURLs;
+});  
